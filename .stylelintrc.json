@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-clean-order"
+  ],
+  "rules": {
+    "max-nesting-depth": 3,
+    "declaration-property-value-no-unknown": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
+  },
+  "ignoreFiles": ["dist/**/*.*", "coverage/**/*.*"]
+}

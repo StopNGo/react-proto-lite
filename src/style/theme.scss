@@ -1,0 +1,32 @@
+@mixin light-theme {
+  --bg-image: linear-gradient(
+    to right top,
+    rgb(207 217 223) 0%,
+    rgb(226 235 240) 100%
+  );
+  --primary-color: rgb(54 83 91);
+  --secondary-color: rgb(118 158 162);
+  --main-bg-color: rgb(255 255 255);
+}
+
+@mixin dark-theme {
+  --bg-image: linear-gradient(
+    to right top,
+    rgb(30 31 32) 0%,
+    rgb(51 53 54) 100%
+  );
+  --primary-color: rgb(225 246 252);
+  --secondary-color: rgb(154 171 173);
+  --main-bg-color: rgb(19 19 19);
+}
+
+:root {
+  --border-radius: 10px;
+  --border-radius-small: 3px;
+
+  @include light-theme;
+
+  .theme-dark {
+    @include dark-theme;
+  }
+}
