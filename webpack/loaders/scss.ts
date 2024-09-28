@@ -1,5 +1,5 @@
 import { RuleSetRule } from 'webpack'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { CssExtractRspackPlugin } from '@rspack/core'
 
 import { TLoader } from '../types'
 
@@ -13,7 +13,7 @@ const universalLoader = (isServer: boolean = false): RuleSetRule => ({
       test: scssModuleRegex,
       use: [
         {
-          loader: MiniCssExtractPlugin.loader,
+          loader: CssExtractRspackPlugin.loader,
           options: {
             emit: !isServer
           }
@@ -41,7 +41,7 @@ const universalLoader = (isServer: boolean = false): RuleSetRule => ({
     {
       use: [
         {
-          loader: MiniCssExtractPlugin.loader,
+          loader: CssExtractRspackPlugin.loader,
           options: {
             emit: !isServer
           }

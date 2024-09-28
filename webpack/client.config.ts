@@ -1,15 +1,16 @@
 import {
   Configuration,
   HotModuleReplacementPlugin,
-  WebpackPluginInstance
-} from 'webpack'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
+  WebpackPluginInstance,
+  CopyRspackPlugin,
+  CssExtractRspackPlugin
+} from '@rspack/core'
+
+import ReactRefreshPlugin from '@rspack/plugin-react-refresh'
 import CssoWebpackPlugin from 'csso-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CopyPlugin from 'copy-webpack-plugin'
 import 'webpack-dev-server'
 
 import { ALIAS, DEV_SERVER_PORT, DIST_DIR, IS_DEV, IS_LAZY_COMPILATION, SRC_DIR } from './constants'
@@ -26,18 +27,18 @@ const plugins: WebpackPluginInstance[] = [
     template: './src/assets/index.html'
   }),
   new ForkTsCheckerWebpackPlugin(),
-  new MiniCssExtractPlugin({
+  new CssExtractRspackPlugin({
     filename: IS_DEV ? '[name].css' : '[name].[contenthash].css'
   }),
   ...(IS_DEV
-    ? [new HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()]
+    ? [new HotModuleReplacementPlugin(), new ReactRefreshPlugin()]
     : [
         new CssoWebpackPlugin(),
         new BundleAnalyzerPlugin({
           analyzerMode: withReport ? 'server' : 'disabled'
         })
       ]),
-  new CopyPlugin({
+  new CopyRspackPlugin({
     patterns: [
       { from: `${SRC_DIR}/i18n/translations`, to: 'lang' },
       { from: `${SRC_DIR}/sw.js`, to: 'sw.js' }
@@ -57,6 +58,7 @@ const clientConfig: Configuration = {
   devtool: IS_DEV ? 'source-map' : false,
   resolve: {
     alias: ALIAS,
+    tsConfig: './tsconfig.json',
     extensions: ['.tsx', '.ts', '.js', '.scss', '.css'],
     fallback: {
       url: false,

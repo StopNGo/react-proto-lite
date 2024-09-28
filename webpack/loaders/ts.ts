@@ -1,24 +1,30 @@
 import { RuleSetRule } from 'webpack'
 
-import { IS_SWC } from '../constants'
 import { TLoader } from '../types'
 
 const tsRegex: RegExp = /\.tsx?$/
 
 const universalLoader: RuleSetRule = {
   test: tsRegex,
-  use: [
-    IS_SWC
-      ? {
-          loader: 'swc-loader'
-        }
-      : {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true
+  use: {
+    loader: 'builtin:swc-loader',
+    options: {
+      jsc: {
+        parser: {
+          syntax: 'typescript',
+          tsx: true
+        },
+        transform: {
+          react: {
+            runtime: 'automatic',
+            development: true,
+            refresh: true
           }
         }
-  ]
+      }
+    }
+  },
+  type: 'javascript/auto'
 }
 
 export const tsLoader: TLoader = {
