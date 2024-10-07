@@ -2,9 +2,8 @@ import path from 'path'
 
 const IS_DEV: boolean = String(process.env.NODE_ENV).trim() === 'development'
 
-const IS_PREACT: boolean = false
-const IS_SWC: boolean = true
-const IS_LAZY_COMPILATION = false
+const IS_PREACT: boolean = true
+const IS_LAZY_COMPILATION = true
 const DEV_SERVER_PORT: number = 8080
 
 const SRC_DIR: string = path.join(__dirname, '../src')
@@ -26,8 +25,7 @@ const ALIAS: Record<string, string> = {
   style: `${SRC_DIR}/style`,
   store: `${SRC_DIR}/store`,
   types: `${SRC_DIR}/types`,
-  utils: `${SRC_DIR}/utils`,
-  _webpack: path.join(__dirname, '../webpack')
+  utils: `${SRC_DIR}/utils`
 }
 
 if (IS_PREACT) {
@@ -45,7 +43,6 @@ export {
   DIST_DIR,
   IS_DEV,
   IS_PREACT,
-  IS_SWC,
   IS_LAZY_COMPILATION,
   SRC_DIR
 }

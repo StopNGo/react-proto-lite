@@ -1,5 +1,4 @@
-import { RuleSetRule } from 'webpack'
-import { CssExtractRspackPlugin } from '@rspack/core'
+import { RuleSetRule, CssExtractRspackPlugin } from '@rspack/core'
 
 import { TLoader } from '../types'
 

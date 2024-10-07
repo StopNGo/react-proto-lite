@@ -1,3 +1,3 @@
-import { clientConfig } from './webpack/client.config'
+import { clientConfig } from './rspack/client.config'
 
 module.exports = clientConfig

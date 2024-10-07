@@ -1,5 +1,4 @@
-import { RuleSetRule } from 'webpack'
-
+import { RuleSetRule } from '@rspack/core'
 import { TLoader } from '../types'
 
 const tsRegex: RegExp = /\.tsx?$/

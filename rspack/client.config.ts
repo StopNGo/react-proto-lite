@@ -1,17 +1,15 @@
 import {
   Configuration,
-  HotModuleReplacementPlugin,
   WebpackPluginInstance,
   CopyRspackPlugin,
-  CssExtractRspackPlugin
+  CssExtractRspackPlugin,
+  HtmlRspackPlugin
 } from '@rspack/core'
 
 import ReactRefreshPlugin from '@rspack/plugin-react-refresh'
 import CssoWebpackPlugin from 'csso-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import 'webpack-dev-server'
 
 import { ALIAS, DEV_SERVER_PORT, DIST_DIR, IS_DEV, IS_LAZY_COMPILATION, SRC_DIR } from './constants'
 import * as Loaders from './loaders'
@@ -22,7 +20,7 @@ const filename = (ext: string): string =>
   IS_DEV ? `[name].${ext}` : `[name].[chunkhash].${ext}`
 
 const plugins: WebpackPluginInstance[] = [
-  new HtmlWebpackPlugin({
+  new HtmlRspackPlugin({
     title: 'React Proto Lie',
     template: './src/assets/index.html'
   }),
@@ -31,7 +29,7 @@ const plugins: WebpackPluginInstance[] = [
     filename: IS_DEV ? '[name].css' : '[name].[contenthash].css'
   }),
   ...(IS_DEV
-    ? [new HotModuleReplacementPlugin(), new ReactRefreshPlugin()]
+    ? [new ReactRefreshPlugin()]
     : [
         new CssoWebpackPlugin(),
         new BundleAnalyzerPlugin({

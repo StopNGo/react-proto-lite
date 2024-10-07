@@ -1,4 +1,4 @@
-import { RuleSetRule } from 'webpack'
+import { RuleSetRule } from '@rspack/core'
 
 import { IS_DEV } from '../constants'
 import { TLoader } from '../types'
