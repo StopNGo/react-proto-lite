@@ -3,7 +3,6 @@ import path from 'path'
 const IS_DEV: boolean = String(process.env.NODE_ENV).trim() === 'development'
 
 const IS_PREACT: boolean = false
-const IS_SWC: boolean = true
 const IS_LAZY_COMPILATION = false
 const DEV_SERVER_PORT: number = 8080
 
@@ -26,16 +25,13 @@ const ALIAS: Record<string, string> = {
   style: `${SRC_DIR}/style`,
   store: `${SRC_DIR}/store`,
   types: `${SRC_DIR}/types`,
-  utils: `${SRC_DIR}/utils`,
-  _webpack: path.join(__dirname, '../webpack')
+  utils: `${SRC_DIR}/utils`
 }
 
 if (IS_PREACT) {
   Object.assign(ALIAS, {
     react: 'preact/compat',
-    'react-dom': 'preact/compat',
-    'react-dom/test-utils': 'preact/test-utils',
-    '@testing-library/react': '@testing-library/preact'
+    'react-dom': 'preact/compat'
   })
 }
 
@@ -45,7 +41,6 @@ export {
   DIST_DIR,
   IS_DEV,
   IS_PREACT,
-  IS_SWC,
   IS_LAZY_COMPILATION,
   SRC_DIR
 }
