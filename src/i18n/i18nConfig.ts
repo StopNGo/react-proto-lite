@@ -10,7 +10,7 @@ export { defaultLangTranslations }
 */
 
 export const supportedLangs = {
-  en: 'English'
+  en: 'English',
 }
 
 /*
@@ -18,7 +18,7 @@ export const supportedLangs = {
   Otherwise, other translations will be loaded from files on the server.
 */
 export const preloadedTranslations = {
-  en: defaultLangTranslations
+  en: defaultLangTranslations,
 }
 
 /*
@@ -30,6 +30,8 @@ export type TSupportedLanguages = typeof supportedLangs
 /*
   For proper typings, add all your translation types here via ampersand (&).
 */
+
+// biome-ignore lint/suspicious/noExplicitAny:
 export type TTranslations = en | { [key: string]: any }
 
 export const langUrl = '/lang/{lang}.json'

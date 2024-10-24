@@ -1,7 +1,7 @@
-import { FC, ReactElement } from 'react'
-import { useRoutes } from 'react-router-dom'
 import cn from 'classnames'
+import type { FC, ReactElement } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
+import { useRoutes } from 'react-router-dom'
 
 import { routes } from 'router/Router'
 

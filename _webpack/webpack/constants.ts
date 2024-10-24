@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 
 const IS_DEV: boolean = String(process.env.NODE_ENV).trim() === 'development'
 
@@ -27,13 +27,13 @@ const ALIAS: Record<string, string> = {
   store: `${SRC_DIR}/store`,
   types: `${SRC_DIR}/types`,
   utils: `${SRC_DIR}/utils`,
-  _webpack: path.join(__dirname, '../webpack')
+  _webpack: path.join(__dirname, '../webpack'),
 }
 
 if (IS_PREACT) {
   Object.assign(ALIAS, {
     react: 'preact/compat',
-    'react-dom': 'preact/compat'
+    'react-dom': 'preact/compat',
   })
 }
 
@@ -45,5 +45,5 @@ export {
   IS_PREACT,
   IS_SWC,
   IS_LAZY_COMPILATION,
-  SRC_DIR
+  SRC_DIR,
 }

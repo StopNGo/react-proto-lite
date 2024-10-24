@@ -1,10 +1,10 @@
-import { useAppSelector, useAppDispatch } from 'store/store'
 import {
-  TSupportedLanguages,
-  TTranslations,
-  defaultLang
+  type TSupportedLanguages,
+  type TTranslations,
+  defaultLang,
 } from 'i18n/i18nConfig'
-import { setLangAsync, i18nState } from './i18nSlice'
+import { useAppDispatch, useAppSelector } from 'store/store'
+import { type i18nState, setLangAsync } from './i18nSlice'
 
 interface IUseTranslationMethods {
   setLang: (newLang: keyof TSupportedLanguages) => void
@@ -14,7 +14,7 @@ interface IUseTranslationMethods {
 
 interface IUseTranslation extends i18nState, IUseTranslationMethods {}
 
-export default function useTranslations (): IUseTranslation {
+export default function useTranslations(): IUseTranslation {
   const dispatch = useAppDispatch()
 
   const translations = useAppSelector((state) => state.i18n.translations)
@@ -27,9 +27,8 @@ export default function useTranslations (): IUseTranslation {
   const t = useAppSelector((state) => {
     if (state.i18n.translations[state.i18n.lang] != null) {
       return state.i18n.translations[state.i18n.lang]
-    } else {
-      return state.i18n.translations[defaultLang]
     }
+    return state.i18n.translations[defaultLang]
   }) as TTranslations
 
   /*
@@ -38,7 +37,7 @@ export default function useTranslations (): IUseTranslation {
     No subkeys are available.
     Could be expanded to the string processing i.e. plurals or formatting.
   */
-  const tt = (key: keyof TTranslations): any => {
+  const tt = (key: keyof TTranslations): string => {
     return useAppSelector((state) => {
       const translation = state.i18n.translations[state.i18n.lang]
       const defaultTranslation = state.i18n.translations[defaultLang]
@@ -47,12 +46,10 @@ export default function useTranslations (): IUseTranslation {
         if (translation != null) {
           if (translation[key] != null) {
             return translation[key]
-          } else {
-            return defaultTranslation[key]
           }
-        } else {
           return defaultTranslation[key]
         }
+        return defaultTranslation[key]
       }
     })
   }
@@ -64,9 +61,9 @@ export default function useTranslations (): IUseTranslation {
     void dispatch(
       setLangAsync(
         Object.keys(supportedLangs).find(
-          (key) => supportedLangs[key as keyof TSupportedLanguages] === newLang
-        ) as keyof TSupportedLanguages
-      )
+          (key) => supportedLangs[key as keyof TSupportedLanguages] === newLang,
+        ) as keyof TSupportedLanguages,
+      ),
     )
   }
 
@@ -77,6 +74,6 @@ export default function useTranslations (): IUseTranslation {
     lang,
     supportedLangs,
     status,
-    setLang
+    setLang,
   }
 }

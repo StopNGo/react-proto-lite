@@ -1,5 +1,5 @@
-import { RuleSetRule } from '@rspack/core'
-import { TLoader } from '../types'
+import type { RuleSetRule } from '@rspack/core'
+import type { TLoader } from '../types'
 
 import { IS_DEV } from '../constants'
 
@@ -13,19 +13,19 @@ const clientLoader: RuleSetRule = {
       jsc: {
         parser: {
           syntax: 'typescript',
-          tsx: true
+          tsx: true,
         },
         transform: {
           react: {
             runtime: 'automatic',
             development: IS_DEV,
-            refresh: IS_DEV
-          }
-        }
-      }
-    }
+            refresh: IS_DEV,
+          },
+        },
+      },
+    },
   },
-  type: 'javascript/auto'
+  type: 'javascript/auto',
 }
 
 const serverLoader: RuleSetRule = structuredClone(clientLoader)
@@ -39,5 +39,5 @@ if (typeof serverLoader.use === 'object' && !Array.isArray(serverLoader.use)) {
 
 export const tsLoader: TLoader = {
   client: clientLoader,
-  server: serverLoader
+  server: serverLoader,
 }

@@ -44,9 +44,9 @@ const clearCache = async () => {
 
 this.addEventListener(
   'install',
-  (event) => event.waitUntil(caches.open(CACHE_NAME)) // eslint-disable-line
+  (event) => event.waitUntil(caches.open(CACHE_NAME)), // eslint-disable-line
 )
 this.addEventListener('fetch', (event) =>
-  event.respondWith(getCachedResource(event.request))
+  event.respondWith(getCachedResource(event.request)),
 )
 this.addEventListener('activate', (event) => event.waitUntil(clearCache()))

@@ -10,6 +10,7 @@ declare module '*.svg'
 declare module '*.svg?url'
 declare module '*.svg?base64'
 interface Window {
+  // biome-ignore lint/suspicious/noExplicitAny:
   __PRELOADED_STATE__: any
 }
 

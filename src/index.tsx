@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
+import { BrowserRouter } from 'react-router-dom'
 
 import { App } from './App'
 
-import { initStore } from 'store/store'
-import { Provider } from 'react-redux'
 import { USE_SERVICE_WORKER } from 'constants/commonConstants'
+import { Provider } from 'react-redux'
+import { initStore } from 'store/store'
 
 import 'style/main.scss'
 

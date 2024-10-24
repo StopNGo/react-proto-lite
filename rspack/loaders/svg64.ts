@@ -1,7 +1,7 @@
-import { RuleSetRule } from '@rspack/core'
+import type { RuleSetRule } from '@rspack/core'
 
 import { IS_DEV } from '../constants'
-import { TLoader } from '../types'
+import type { TLoader } from '../types'
 
 const svgRegex: RegExp = /\.svg$/i
 
@@ -10,11 +10,11 @@ const universalLoader: RuleSetRule = {
   type: 'asset/inline',
   resourceQuery: /base64/,
   generator: {
-    filename: `images/${IS_DEV ? '[name][ext]' : '[name]-[hash][ext]'}`
-  }
+    filename: `images/${IS_DEV ? '[name][ext]' : '[name]-[hash][ext]'}`,
+  },
 }
 
 export const svgLoader: TLoader = {
   client: universalLoader,
-  server: universalLoader
+  server: universalLoader,
 }

@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-config-clean-order"
-  ],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
   "rules": {
     "max-nesting-depth": 3,
     "declaration-property-value-no-unknown": true,

@@ -10,10 +10,13 @@
   @param {string} name - component name in a form of folder name (comp-name, not CompName)
 */
 
-import { access, mkdir, writeFile, appendFile } from 'fs'
-import { EOL } from 'os'
+import { access, appendFile, mkdir, writeFile } from 'node:fs'
+import { EOL } from 'node:os'
 
-const name = process.argv[2].replace(/[^a-z0-9_-]/gi, '_').toLowerCase().replace(/^[0-9]/g, '_$&')
+const name = process.argv[2]
+  .replace(/[^a-z0-9_-]/gi, '_')
+  .toLowerCase()
+  .replace(/^[0-9]/g, '_$&')
 
 const compDir = 'src/components/'
 const path = `${compDir}${name}/`

@@ -1,11 +1,11 @@
-import { RuleSetRule, CssExtractRspackPlugin } from '@rspack/core'
+import { CssExtractRspackPlugin, type RuleSetRule } from '@rspack/core'
 
-import { TLoader } from '../types'
+import type { TLoader } from '../types'
 
 const scssRegex: RegExp = /\.s?[ac]?ss$/
 const scssModuleRegex: RegExp = /\.module\.s?[ac]?ss$/
 
-const universalLoader = (isServer: boolean = false): RuleSetRule => ({
+const universalLoader = (isServer = false): RuleSetRule => ({
   test: scssRegex,
   oneOf: [
     {
@@ -14,8 +14,8 @@ const universalLoader = (isServer: boolean = false): RuleSetRule => ({
         {
           loader: CssExtractRspackPlugin.loader,
           options: {
-            emit: !isServer
-          }
+            emit: !isServer,
+          },
         },
         {
           loader: 'css-loader',
@@ -28,31 +28,31 @@ const universalLoader = (isServer: boolean = false): RuleSetRule => ({
               */
               localIdentName: '[folder]__[local]--[hash:base64:5]',
               namedExport: false,
-              exportLocalsConvention: 'as-is'
-            }
-          }
+              exportLocalsConvention: 'as-is',
+            },
+          },
         },
         {
-          loader: 'sass-loader'
-        }
-      ]
+          loader: 'sass-loader',
+        },
+      ],
     },
     {
       use: [
         {
           loader: CssExtractRspackPlugin.loader,
           options: {
-            emit: !isServer
-          }
+            emit: !isServer,
+          },
         },
         'css-loader',
-        'sass-loader'
-      ]
-    }
-  ]
+        'sass-loader',
+      ],
+    },
+  ],
 })
 
 export const scssLoader: TLoader = {
   client: universalLoader(),
-  server: universalLoader(true)
+  server: universalLoader(true),
 }

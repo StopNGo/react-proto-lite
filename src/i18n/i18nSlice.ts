@@ -1,13 +1,17 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-
-import { RootState } from 'store/store'
 import {
+  type PayloadAction,
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit'
+
+import {
+  type TSupportedLanguages,
+  type TTranslations,
   defaultLang,
-  supportedLangs,
-  TSupportedLanguages,
   preloadedTranslations,
-  TTranslations
+  supportedLangs,
 } from 'i18n/i18nConfig'
+import type { RootState } from 'store/store'
 import { fetchTranslations } from './i18nApi'
 
 export interface i18nState {
@@ -21,14 +25,14 @@ export const initialState: i18nState = {
   status: 'idle',
   lang: defaultLang,
   supportedLangs: { ...supportedLangs },
-  translations: preloadedTranslations
+  translations: preloadedTranslations,
 }
 
 export const setLangAsync = createAsyncThunk(
   'i18n/setLangAsync',
   async (lang: keyof TSupportedLanguages, { getState, dispatch }) => {
     const i18nState = (getState() as RootState).i18n
-    let translations
+    let translations: unknown
     const resolvedLang: keyof TSupportedLanguages =
       lang != null ? lang : i18nState.lang
     if (i18nState.translations[lang] == null) {
@@ -38,7 +42,7 @@ export const setLangAsync = createAsyncThunk(
     }
     dispatch(i18nSlice.actions.setLang(resolvedLang))
     return translations as TTranslations
-  }
+  },
 )
 
 export const i18nSlice = createSlice({
@@ -47,7 +51,7 @@ export const i18nSlice = createSlice({
   reducers: {
     setLang: (state, action: PayloadAction<keyof TSupportedLanguages>) => {
       state.lang = action.payload
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(setLangAsync.pending, (state) => {
@@ -57,7 +61,7 @@ export const i18nSlice = createSlice({
       state.translations[state.lang] = action.payload
       state.status = 'idle'
     })
-  }
+  },
 })
 
 export const { setLang } = i18nSlice.actions

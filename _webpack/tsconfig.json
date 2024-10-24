@@ -37,5 +37,5 @@
     "compilerOptions": { "module": "commonjs" }
   },
   "include": ["src", "webpack", "webpack.config.ts"],
-  "exclude": ["node_modules", "**/*.js"],
+  "exclude": ["node_modules", "**/*.js"]
 }
